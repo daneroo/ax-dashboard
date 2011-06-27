@@ -1,5 +1,5 @@
 ## Axial Dashboard
-This repo supports the [production dashboard of metrics for Axial operations](dashboard.axialdev.net).
+This repo supports the [production dashboard of metrics for Axial operations](http://dashboard.axialdev.net).
 
 ### Metrics
 
