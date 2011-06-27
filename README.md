@@ -3,8 +3,8 @@ This repo supports the [production dashboard of metrics for Axial operations](ht
 
 ### Metrics
 
-    * Ekoforms
-    * Ekocards
+* Ekoforms
+* Ekocards
 
 ### TODO
 
