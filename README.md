@@ -9,11 +9,13 @@ This repo supports the [production dashboard of metrics for Axial operations](ht
 ### TODO
 
 Deploy minimal working example.
-    * capistrano
-    * authentication
+
+* capistrano
+* authentication
 
 Nice-to-haves
-    * authentication
-    * REST interface
-    * https
+
+* authentication
+* REST interface
+* https
     
