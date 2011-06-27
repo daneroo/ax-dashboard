@@ -1,0 +1,99 @@
+<!DOCTYPE html> 
+<html> 
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, minimum-scale=1, maximum-scale=1"> 
+        <title>Axial Dashboard</title> 
+        <link rel="stylesheet"  href="http://code.jquery.com/mobile/1.0b1/jquery.mobile-1.0b1.min.css" />  
+        <link rel="stylesheet"  href="mobile.css" />  
+        <script type="text/javascript" src="http://www.google.com/jsapi"></script>
+        <script type="text/javascript" src="http://code.jquery.com/jquery-1.5.min.js"></script>
+        <script type="text/javascript" src="mobile.js"></script>
+        <script type="text/javascript" src="http://code.jquery.com/mobile/1.0b1/jquery.mobile-1.0b1.min.js"></script>
+        <!--
+        <script type="text/javascript" src="http://cdnjs.cloudflare.com/ajax/libs/underscore.js/1.1.6/underscore-min.js"></script>
+        <script type="text/javascript" src="http://cdnjs.cloudflare.com/ajax/libs/underscore.string/1.1.4/underscore.string.min.js"></script>
+        -->
+        <script type="text/javascript" src="data.js"></script>
+    </head>        
+    <body> 
+        <div data-role="page" id="home">
+            <div data-role="header" data-position="fixed">
+                <h1>Axial Dashboard</h1>
+            </div>
+            <div data-role="content">	                
+                <div id="viz">
+                  <img class="small-logo"  src="/images/logo-axial.gif" alt="Axial" />
+                </div>
+            </div>
+
+            <div data-role="footer" data-id="footer1" data-position="fixed">
+              <div data-role="navbar">
+                <ul>
+                  <li><a href="#home" class="ui-btn-active ui-state-persist" data-icon="home">Home</a></li>
+                  <!--<li><a href="#help" data-icon="info">Help</a></li>-->
+                  <li><a href="#about" data-icon="info">About</a></li>
+                  <li><a href="#home" data-icon="grid">Metrics</a></li>
+                  <li><a href="#home" data-icon="star">Favs</a></li>
+                  <li><a href="#help" data-icon="gear">Settings</a></li>
+                  <!--<li><a href="#settings">Emails</a></li>-->
+                </ul>
+              </div><!-- /navbar -->
+              <p class="copyright">&copy;2011 - Axial Développement</p>
+            </div><!-- /footer -->
+          </div>
+
+        <div data-role="page" id="about">
+            <div data-role="header">
+                <h1>About</h1>
+            </div>
+            <div data-role="content">	
+                <h2>About</h2>
+                <p>I'm the about page.</p>		
+                <p><a href="#home" data-direction="reverse">Back to Home</a></p>	
+            </div>
+
+            <div data-role="footer" data-id="footer1" data-position="fixed">
+              <div data-role="navbar">
+                <ul>
+                  <li><a href="#home" data-icon="home">Home</a></li>
+                  <!--<li><a href="#help" data-icon="info">Help</a></li>-->
+                  <li><a href="#about" class="ui-btn-active ui-state-persist" data-icon="info">About</a></li>
+                  <li><a href="#home" data-icon="grid">Metrics</a></li>
+                  <li><a href="#home" data-icon="star">Favs</a></li>
+                  <li><a href="#help" data-icon="gear">Settings</a></li>
+                  <!--<li><a href="#settings">Emails</a></li>-->
+                </ul>
+              </div><!-- /navbar -->
+              <p class="copyright">&copy;2011 - Axial Développement</p>
+            </div><!-- /footer -->
+        </div>
+
+        <div data-role="page" id="help">
+            <div data-role="header">
+                <h1>Help</h1>
+            </div>
+            <div data-role="content">	
+                <h2>Help</h2>
+
+                <p>I'm the help page, viewed as a dialog.</p>		
+                <p><a href="#home" data-rel="back">Back to Home</a></p>	
+            </div>
+            <div data-role="footer" data-id="footer1" data-position="fixed">
+              <div data-role="navbar">
+                <ul>
+                  <li><a href="#home" data-icon="home" >Home</a></li>
+                  <!--<li><a href="#help" data-icon="info">Help</a></li>-->
+                  <li><a href="#about" data-icon="info">About</a></li>
+                  <li><a href="#home" data-icon="grid">Metrics</a></li>
+                  <li><a href="#home" data-icon="star">Favs</a></li>
+                  <li><a href="#help" class="ui-btn-active ui-state-persist" data-icon="gear">Settings</a></li>
+                  <!--<li><a href="#settings">Emails</a></li>-->
+                </ul>
+              </div><!-- /navbar -->
+              <p class="copyright">&copy;2011 - Axial Développement</p>
+            </div><!-- /footer -->
+        </div>
+    </body>
+</html>
+

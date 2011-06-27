@@ -1,0 +1,13 @@
+
+img.small-logo{
+    display: block; 
+    height:32px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+p.copyright {
+    color: #777;
+    text-align: center;
+    font-size: 70%;
+}
