@@ -1,9 +1,7 @@
 //http://ajax.microsoft.com/ajax/jquery.templates/beta1/jquery.tmpl.min.js
 
 function dashboard_load(scripts) {
-  console.log('doing loader');
   for (var i=0; i < scripts.length; i++) {
-    console.log('  load', scripts[i]);
     document.write('<script type="text/javascript" src="'+scripts[i]+'"><\/script>')
   };
 };
@@ -21,6 +19,9 @@ dashboard_load([
   "http://code.jquery.com/jquery-1.5.min.js",
   "/js/mobile.js", // before mobile, for mobileinit
   "http://code.jquery.com/mobile/1.0b1/jquery.mobile-1.0b1.min.js",
+
+  // jQ Templates
+  "http://ajax.aspnetcdn.com/ajax/jquery.templates/beta1/jquery.tmpl.min.js",
 
   // _underscore.js
   "http://cdnjs.cloudflare.com/ajax/libs/underscore.js/1.1.6/underscore-min.js",

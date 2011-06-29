@@ -4,9 +4,25 @@ google.setOnLoadCallback(function(){
   drawTable();
 });
 
-var endpointurl = 'http://' + window.location.host + window.location.pathname.replace('mobile.html', 'service.php');    
+// returls a root relative url
+// path should start with a slash
+function getEndpointURL(path){
+  path = path||'/';
+  var u = window.location.protocol+'//'+window.location.host;
+  if (window.location.port!=""){
+    u+=":"+window.location.port;
+  }
+  u+=path;
+  return u;
+}
+// svc shoud start with a slash
+function serviceURL(svc){
+  return getEndpointURL('/service.php'+svc);      
+}
+
+
 function getAnswersByDate(callback){
-    var url = endpointurl+'/ekoforms/answersByDate';    
+    var url = serviceURL('/ekoforms/answersByDate');    
     console.log("-byDate");
     $.getJSON(url, function(data) {
       //console.log(data);
@@ -17,7 +33,7 @@ function getAnswersByDate(callback){
 }
 
 function getAnswersByQuestByDate(callback){
-    var url = endpointurl+'/ekoforms/answersByQuestByDate';    
+    var url = serviceURL('/ekoforms/answersByQuestByDate');    
     console.log("-byQuestByDate");
     $.getJSON(url, function(data) {
       //console.log("+byQuestByDate",data);
