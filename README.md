@@ -18,4 +18,7 @@ Nice-to-haves
 * authentication
 * REST interface
 * https
+
+Add this Pipeline
     
+https://spreadsheets.google.com/spreadsheet/ccc?key=0AqeKhjFW4mTFdFpNY1czS3ppZmlhMFhGc2NoMUtpRnc#gid=1    

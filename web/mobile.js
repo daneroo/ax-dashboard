@@ -4,15 +4,6 @@ $.log = function(m) {
     }
 };
 
-function getQuest(qid,callback){
-    var endpointurl = 'http://' + window.location.host + window.location.pathname.replace('mobile.html', 'services/quest');    
-    //var methodName = 'system.listMethods';
-    var methodName = 'getQuest';
-    //var params=["ID:4df10622c9519c8116000000"];
-    var params=[qid];
-    return jsonrpc(endpointurl,methodName,params,callback);
-}
-
 var nextJsonInvocationId=31416;
 function jsonrpc(endpointurl,methodName,params,callbackFunction){
     var async=false;
@@ -128,7 +119,9 @@ function create_page(page_id) {
 }
 
 $(document).ready(function() {
-    $.log("about to get quest");
+  $('#byNone').click(function(){drawTable();});
+  $('#byDate').click(function(){drawTable('byDate');});
+  $('#byQuest').click(function(){drawTable('byQuest');});
     $("#dynapage").click(function(){
         var minisiteId = 'ID:4df8c724c9519cad5a000002';
         var fbdemoId = 'ID:4df10622c9519c8116000000';
