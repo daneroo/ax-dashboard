@@ -1,5 +1,8 @@
 google.load("visualization", "1", {packages:["corechart","table"]});
-google.setOnLoadCallback(drawTable);
+google.setOnLoadCallback(function(){
+  drawPipeline();
+  drawTable();
+});
 
 var endpointurl = 'http://' + window.location.host + window.location.pathname.replace('mobile.html', 'service.php');    
 function getAnswersByDate(callback){
@@ -100,3 +103,27 @@ function drawTable(how) {
 }
 
 
+function drawPipeline() {
+  // To see the data that this visualization uses, browse to
+  // https://spreadsheets.google.com/spreadsheet/ccc?key=0AqeKhjFW4mTFdFpNY1czS3ppZmlhMFhGc2NoMUtpRnc#gid=1
+  var query = new google.visualization.Query(
+      'https://spreadsheets.google.com/spreadsheet/tq?range=A1:B11&gid=1&key=0AqeKhjFW4mTFdFpNY1czS3ppZmlhMFhGc2NoMUtpRnc');
+  
+  // Send the query with a callback function.
+  query.send(handlePipeline);
+}
+
+function handlePipeline(response) {
+  if (response.isError()) {
+    alert('Error in query: ' + response.getMessage() + ' ' + response.getDetailedMessage());
+    return;
+  }
+
+  var data = response.getDataTable();
+  visualization = new google.visualization.ColumnChart(document.getElementById('pipeline'));
+  visualization.draw(data, {
+    width: 600, height: 300, 
+    //hAxis: {title: 'Date'},
+    title: 'Axial Pipeline'
+  });
+}
