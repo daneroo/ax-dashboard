@@ -33,44 +33,29 @@
                 <h1>${header}</h1>
             </div>
             <div data-role="content">
-              Here is a brand new page (${id} : ${header})
+              {{if $item.html().length>0 }}
+                  {{html $item.html()}}
+              {{else}}
+                Here is a brand new page (${id} : ${header})
+              {{/if}}
             </div>
             {{tmpl "footerTmpl"}}
         </div>
     </script>
-    <div data-role="page" id="home">
-        <div data-role="header" data-position="fixed">
-            <h1>Axial Dashboard</h1>
+    <script id="homeTmpl" type="text/x-jquery-tmpl">
+        {{wrap({id:'home',header:'Axial Dashboard'}) "#pageTmpl"}}
+        <div id="pipeline"></div>
+        <div id="viz">
+            <img class="small-logo"  src="/images/logo-axial.gif" alt="Axial" />
         </div>
-        <div data-role="content">	                
-            <div id="pipeline"></div>
-            <div id="viz">
-                <img class="small-logo"  src="/images/logo-axial.gif" alt="Axial" />
-            </div>
-            <div data-type="horizontal" data-role="controlgroup">
-                <a href="#" id="byNone" data-role="button">No Group</a>
-                <a href="#" id="byDate" data-role="button">by Date</a>
-                <a href="#" id="byQuest" data-role="button">by Quest</a>
-            </div>
-            <div id="tbl"></div>
+        <div data-type="horizontal" data-role="controlgroup">
+            <a href="#" id="byNone" data-role="button">No Group</a>
+            <a href="#" id="byDate" data-role="button">by Date</a>
+            <a href="#" id="byQuest" data-role="button">by Quest</a>
         </div>
-
-        <div data-role="footer" data-id="footer1" data-position="fixed">
-            <div data-role="navbar">
-                <ul>
-                    <li><a href="#home" class="ui-btn-active ui-state-persist" data-icon="home">Home</a></li>
-                    <!--<li><a href="#help" data-icon="info">Help</a></li>-->
-                    <li><a href="#about" data-icon="info">About</a></li>
-                    <li><a href="#metrics" data-icon="grid">Metrics</a></li>
-                    <li><a href="#home" data-icon="star">Favs</a></li>
-                    <li><a href="#help" data-icon="gear">Settings</a></li>
-                    <!--<li><a href="#settings">Emails</a></li>-->
-                </ul>
-            </div><!-- /navbar -->
-            <p class="copyright">&copy;2011 - Axial Développement</p>
-        </div><!-- /footer -->
-    </div>
-
+        <div id="tbl"></div>
+        {{/wrap}}
+    </script>
 </body>
 <script type="text/javascript" src="/js/loader.js"></script>
 </html>

@@ -42,6 +42,8 @@ $(document).ready(function() {
   $.template( 'pageTmpl', $('#pageTmpl') );
   $.template( 'footerTmpl', $('#footerTmpl') );
   $.template( 'navbarItmTmpl', $('#navbarItmTmpl') );
+  $.template( 'homeTmpl', $('#homeTmpl') );
+  $.tmpl( 'homeTmpl',null).appendTo('body');
   $.tmpl( 'pageTmpl', [
     { id : 'about', header:'About' },
     { id : 'metrics', header:'Metrics' },
