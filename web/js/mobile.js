@@ -25,9 +25,9 @@ function create_page(page_id) {
 
 $(document).ready(function() {
   $.log("jQuery ready");
-  $('#byNone').click(function(){drawTable();});
-  $('#byDate').click(function(){drawTable('byDate');});
-  $('#byQuest').click(function(){drawTable('byQuest');});
+  $('#byNone').live('click',function(){drawTable();});
+  $('#byDate').live('click',function(){drawTable('byDate');});
+  $('#byQuest').live('click',function(){drawTable('byQuest');});
 
   // template loader init - 
   // modified to use named templates...
