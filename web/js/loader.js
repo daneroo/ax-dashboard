@@ -1,5 +1,3 @@
-//http://ajax.microsoft.com/ajax/jquery.templates/beta1/jquery.tmpl.min.js
-
 function dashboard_load(scripts) {
   for (var i=0; i < scripts.length; i++) {
     document.write('<script type="text/javascript" src="'+scripts[i]+'"><\/script>')
@@ -22,6 +20,9 @@ dashboard_load([
 
   // jQ Templates
   "http://ajax.aspnetcdn.com/ajax/jquery.templates/beta1/jquery.tmpl.min.js",
+  // jQ Template loader
+  //"/js/tmpload-v1.0.min.js",
+  "/js/tmpload-v1.0.js",
 
   // _underscore.js
   "http://cdnjs.cloudflare.com/ajax/libs/underscore.js/1.1.6/underscore-min.js",

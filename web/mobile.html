@@ -9,53 +9,11 @@
 </head>        
 <body> 
 <!--Here is a footer (${id} : ${header})-->
-    <script id="navbarItmTmpl" type="text/x-jquery-tmpl">
-    <li><a href="#${navid}" {{if id===navid}}class="ui-btn-active ui-state-persist"{{/if}} data-icon="${icon}">${label}</a></li>
-    </script>
     <script id="footerTmpl" type="text/x-jquery-tmpl">
-        <div data-role="footer" data-id="footer1" data-position="fixed">
-            <div data-role="navbar">
-                <ul>
-                {{tmpl([
-                {id:id,navid:'home',icon:'home',label:'Home'},
-                {id:id,navid:'about',icon:'info',label:'About'},
-                {id:id,navid:'metrics',icon:'grid',label:'Metrics'},
-                {id:id,navid:'favs',icon:'star',label:'Favs'},
-                {id:id,navid:'help',icon:'gear',label:'Settings'}]) "navbarItmTmpl"}}                    
-                </ul>
-            </div><!-- /navbar -->
-            <p class="copyright">&copy;2011 - Axial Développement</p>
-        </div><!-- /footer -->
     </script>
-    <script id="pageTmpl" type="text/x-jquery-tmpl">
-        <div data-role="page" id="${id}">
-            <div data-role="header" data-position="fixed">
-                <h1>${header}</h1>
-            </div>
-            <div data-role="content">
-              {{if $item.html().length>0 }}
-                  {{html $item.html()}}
-              {{else}}
-                Here is a brand new page (${id} : ${header})
-              {{/if}}
-            </div>
-            {{tmpl "footerTmpl"}}
-        </div>
-    </script>
-    <script id="homeTmpl" type="text/x-jquery-tmpl">
-        {{wrap({id:'home',header:'Axial Dashboard'}) "#pageTmpl"}}
-        <div id="pipeline"></div>
-        <div id="viz">
-            <img class="small-logo"  src="/images/logo-axial.gif" alt="Axial" />
-        </div>
-        <div data-type="horizontal" data-role="controlgroup">
-            <a href="#" id="byNone" data-role="button">No Group</a>
-            <a href="#" id="byDate" data-role="button">by Date</a>
-            <a href="#" id="byQuest" data-role="button">by Quest</a>
-        </div>
-        <div id="tbl"></div>
-        {{/wrap}}
-    </script>
+    <div data-role="page" id="loading">
+        <div data-role="content">Loading</div>
+    </div>
 </body>
 <script type="text/javascript" src="/js/loader.js"></script>
 </html>

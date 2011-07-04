@@ -4,17 +4,6 @@ $.log = function(m) {
     }
 };
 
-function gen_page(id,header,content){
-    var page = {};
-    page.elt =  $('<div data-role="page" data-url="' + id + '" id="' +id + '" />')
-    page.header = $('<div data-role="header" />');
-    if (header) page.header.html(header);
-    page.content = $('<div data-role="content" />');
-    if (content) page.content.html(content);
-    page.elt.append(page.header);
-    page.elt.append(page.content);
-    return page;
-}
 function create_page(page_id) {
     // make sure it does not exist already
     if ($("#"+page_id).length>0){
@@ -39,17 +28,29 @@ $(document).ready(function() {
   $('#byNone').click(function(){drawTable();});
   $('#byDate').click(function(){drawTable('byDate');});
   $('#byQuest').click(function(){drawTable('byQuest');});
-  $.template( 'pageTmpl', $('#pageTmpl') );
-  $.template( 'footerTmpl', $('#footerTmpl') );
-  $.template( 'navbarItmTmpl', $('#navbarItmTmpl') );
-  $.template( 'homeTmpl', $('#homeTmpl') );
-  $.tmpl( 'homeTmpl',null).appendTo('body');
-  $.tmpl( 'pageTmpl', [
-    { id : 'about', header:'About' },
-    { id : 'metrics', header:'Metrics' },
-    { id : 'favs', header:'Favorites' },
-    { id : 'help', header:'Help' }  
-  ]).appendTo( "body" );
+
+  // template loader init - 
+  // modified to use named templates...
+  $.tmpload('navbarItm', '/tmpl/navbarItm.html');
+  $.tmpload('footer', '/tmpl/footer.html');
+  $.tmpload('page', '/tmpl/page.html');
+  $.tmpload('home', '/tmpl/home.html');
+  $.when(
+    $.tmpload('navbarItm'),
+    $.tmpload('footer'),
+    $.tmpload('page'),
+    $.tmpload('home')
+  ).then(function(/*tmpl,data*/){
+    console.log('then',arguments.length);
+    $.tmpl( 'page', [
+      { id : 'about', header:'About' },
+      { id : 'metrics', header:'Metrics' },
+      { id : 'favs', header:'Favorites' },
+      { id : 'help', header:'Help' }  
+    ]).appendTo( "body" );
+    $.tmpl('home',{}).appendTo('body');
+    $.mobile.changePage( $('#home'), { transition: "fade"} );
+  });  
 });
 
 $(document).bind("mobileinit", function(){
