@@ -1,12 +1,7 @@
 <div data-role="footer" data-id="footer1" data-position="fixed">
     <div data-role="navbar">
-        <ul>
-        {{tmpl([
-        {id:id,navid:'home',icon:'home',label:'Home'},
-        {id:id,navid:'about',icon:'info',label:'About'},
-        {id:id,navid:'metrics',icon:'grid',label:'Metrics'},
-        {id:id,navid:'favs',icon:'star',label:'Favs'},
-        {id:id,navid:'help',icon:'gear',label:'Settings'}]) "navbarItm"}}                    
+        <ul>        
+            {{tmpl($item.parent.site) "navbarItm"}}
         </ul>
     </div><!-- /navbar -->
     <p class="copyright">&copy;2011 - Axial Développement</p>

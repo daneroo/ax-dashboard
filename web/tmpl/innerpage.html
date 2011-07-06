@@ -1,0 +1,9 @@
+{{tmpl "header"}}
+<div data-role="content">
+  {{if $item.html().length>0 }}
+      {{html $item.html()}}
+  {{else}}
+    Here is a brand new page (${id} : ${header})
+  {{/if}}
+</div>
+{{tmpl "footer"}}

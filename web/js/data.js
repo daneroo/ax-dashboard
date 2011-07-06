@@ -1,7 +1,7 @@
 google.load("visualization", "1", {packages:["corechart","table"]});
 google.setOnLoadCallback(function(){
-  drawPipeline();
-  drawTable();
+  //drawPipeline();
+  //drawTable();
 });
 
 // returls a root relative url
