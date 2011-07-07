@@ -42,7 +42,7 @@ function renderPageWidgets(pageElt){
             renderMap($(this).find('.gmap')[0],item.data);
         } else if ('gdocviz'==wtype){
             console.log('rendering a map');
-            renderGDocViz($(this).find('.gmap')[0],item.data);
+            renderGDocViz($(this).find('.gdocviz')[0],item.data);
         }
     });  
 }
@@ -57,7 +57,8 @@ function renderGDocViz(element,widgetData) {
     var data = response.getDataTable();
     visualization = new google.visualization.ColumnChart(element);
     visualization.draw(data, {
-      width: 600, height: 300, 
+      //width: 600,
+      height: 300, 
       //hAxis: {title: 'Date'},
       title: 'Axial Pipeline'
     });
