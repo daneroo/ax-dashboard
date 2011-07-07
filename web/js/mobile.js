@@ -4,7 +4,78 @@ $.log = function(m) {
     }
 };
 
+function templateForWidgetType(type){
+  var templates={
+    header:"widget-header",
+    p:"widget-paragraph",
+    map:'widget-map'
+  }
+  var t = templates[type] || "widget-other";
+  return t;
+}
+function renderPage(page,site){
+  var pageSelect = $('#'+page.id); 
+  if (pageSelect.length>0){
+    pageElt=$(pageSelect[0]);
+    console.log("rendering inner only for page:",page.id,pageElt);
+    pageElt.html($.tmpl( 'page-inner', page,{site:site}));
+    //pageElt.page();
+  } else {
+    console.log("rendering outer page:",page.id);
+    $.tmpl( 'page', page,{site:site}).appendTo( "body" );
+  }
+}
+function renderPageWidgets(pageElt){
+  pageElt.find('div[data-role=content] .widget').each(function(){
+    var item = $(this).tmplItem();
+    var wtype = item.data.type;
+    var tpl = templateForWidgetType(wtype);
+    $(this).html($.tmpl(tpl,item.data));
+    if ('map'==wtype){
+      console.log('rendering a map');
+      renderMap($(this).find('.gmap')[0],item.data);
+    }
+  });  
+}
+
+/*
+J8Z 1P1 : 45.465715,-75.75516700000003
+J8Y 6T7 : 45.453885,-75.73012299999999
+J1N 2K7 : 45.368559,-71.99262700000003
+*/
+function renderMap(element,widgetData) {
+  console.log('wData',widgetData);
+  geocoder = new google.maps.Geocoder();
+    var myOptions = {
+        zoom: 15,
+        //center: latlng,
+        mapTypeId: google.maps.MapTypeId.ROADMAP
+    }
+    var map = new google.maps.Map(element, myOptions);
+    var markersArray=[];
+    var markerBounds = new google.maps.LatLngBounds();
+    if (widgetData.locations && widgetData.locations.length>0){
+      for (var i = 0; i < widgetData.locations.length; i++) {
+        var location = widgetData.locations[i];
+        var latlng = new google.maps.LatLng(location.latlng.lat,location.latlng.lng);
+        if (location.latlng){
+          console.log(location);
+          var marker = new google.maps.Marker({
+            position: latlng,//location.latlng,
+            map: map,
+            title: location.label
+          });
+          markersArray.push(marker);
+          markerBounds.extend(latlng);
+        }
+      }
+      map.fitBounds(markerBounds);
+    }
+    
+}
+
 $(document).ready(function() {
+  $.log("jQuery ready");
   /*
   var palette = {
     ekoform-thing1:{
@@ -29,22 +100,8 @@ $(document).ready(function() {
     map:{},
   }
   
-  function templateForWidgetType(type){
-    var templates={
-      header:"header-widget"
-    }
-    var t = templates[type] || "other-widget";
-    return t;
-  }
-  function renderPageWidgets(pageElt){
-    pageElt.find('div[data-role=content] .widget').each(function(){
-      var item = $(this).tmplItem();
-      var tpl = templateForWidgetType(item.data.type);
-      $(this).html($.tmpl(tpl,item.data));
-    });
-    
-  }
-  var site1 = [  
+  var site1 = {name:'Axial Micro',
+  pages:[  
   { id : 'home', name:'Home', icon:'home',widgets:[
    {type: 'header', level:1,label:'Home'},
     {type:'p', label:lorem[0]}
@@ -59,14 +116,20 @@ $(document).ready(function() {
   ]},
   { id : 'contact', name:'Contact',icon:'star', widgets:[
    {type: 'header', level:1,label:'Contact'},
-   {type: 'map', "latlng":{"lat":45.699338,"lng":-71.46033899999998}}
+   {type: 'map', 
+    locations:[ 
+    {label:'Axial-Gatineau (J8Y 6T7)',"latlng":{"lat":45.453885,"lng":-75.73012299999999}},
+    {label:'Axial-Sherbrooke (J1N 2K7)',"latlng":{"lat":45.368559,"lng":-71.99262700000003}},
+    ]
+   }
   ] }  
-  ];
-  $.log("jQuery ready");
+  ]};
 
   // template loader init - 
   // modified to use named templates...
-  var tmpls=['page','header','footer','navbarItm','widget','header-widget','other-widget'];
+  var tmpls=['page','page-inner','page-header','page-footer','page-navbarItm',
+   'widget-base','widget-header','widget-paragraph','widget-map','widget-other'
+   ];
   var tmplBase='/tmpl/';
   var loadingDfds=[];
   $.each(tmpls,function(index,tmplName){
@@ -74,18 +137,34 @@ $(document).ready(function() {
     $.tmpload(tmplName, tmplUrl);
     loadingDfds.push($.tmpload(tmplName));
   });
+  // use apply to pass the array as individual params
   $.when.apply($,loadingDfds).then(function(/*tmpl,data*/){
-    //console.log('then',arguments.length);
-    $.tmpl( 'page', site1,{site:site1}).appendTo( "body" );
+    console.log('then:',arguments.length);
+    $.each(site1.pages,function(index,page){
+      renderPage(page,site1);
+    })
 
-    $('div[data-role=page]').live('pagebeforeshow pagebeforehide pageshow pagehide',function(event,ui){
-      console.log('-',event.type,':',[$(this),ui.prevPage,ui.nextPage]);
-    });
     $('div[data-role=page]').live('pagebeforeshow',function(event,ui){
       renderPageWidgets($(this));
     });
-    
-    $.mobile.changePage( $('#home'), { transition: "fade"} );
+
+    // There is a race here assuming that when $.mobile.activePage is set,
+    // It is safe to navigate to a new page (home) by default
+    function goHomeWhenReady(){
+      if ($.mobile && $.mobile.activePage) {
+        var activePageId =$.mobile.activePage.attr('id');
+        console.log('active page:',activePageId,' hash:',location.hash);
+        if (activePageId=='splash'){
+          startHash = location.hash || '#home';
+          console.log('going to :',startHash);
+          $.mobile.changePage( $(startHash));
+        }
+      } else {
+        console.log('not ready to go home!')
+        setTimeout(goHomeWhenReady,10);
+      }
+    }
+    goHomeWhenReady();
   });  
     
 });
@@ -93,13 +172,8 @@ $(document).ready(function() {
 $(document).bind("mobileinit", function(){
     $.log("mobileinit");
     $.mobile.page.prototype.options.addBackBtn=true;
-
-    /*
-    $('#notexist').live('pagebeforecreate',function(event){
-        $.log('This page was just inserted into the dom!');
+    var events = 'pagebeforecreate pagecreate pagebeforehide pagebeforeshow pagehide pageshow';
+    if(0)$('div[data-role=page]').live(events,function(event,ui){
+      console.log('-',event.type,':',[$(this),ui.prevPage,ui.nextPage]);
     });
-    $('#minisite-step1').live('pagecreate',function(event){
-        $.log('This page was just enhanced by jQuery Mobile!');
-    });
-    */
 });

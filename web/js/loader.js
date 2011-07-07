@@ -15,8 +15,6 @@ dashboard_load([
 
   // jquery - jquery mobile
   "http://code.jquery.com/jquery-1.5.min.js",
-  "/js/mobile.js", // before mobile, for mobileinit
-  "http://code.jquery.com/mobile/1.0b1/jquery.mobile-1.0b1.min.js",
 
   // jQ Templates
   "http://ajax.aspnetcdn.com/ajax/jquery.templates/beta1/jquery.tmpl.min.js",
@@ -24,14 +22,21 @@ dashboard_load([
   //"/js/tmpload-v1.0.min.js",
   "/js/tmpload-v1.0.js",
 
+  "/js/mobile.js", // before mobile, for mobileinit
+  "http://code.jquery.com/mobile/1.0b1/jquery.mobile-1.0b1.min.js",
+
+
   // _underscore.js
-  "http://cdnjs.cloudflare.com/ajax/libs/underscore.js/1.1.6/underscore-min.js",
-  "http://cdnjs.cloudflare.com/ajax/libs/underscore.string/1.1.4/underscore.string.min.js",
+  //"http://cdnjs.cloudflare.com/ajax/libs/underscore.js/1.1.6/underscore-min.js",
+  //"http://cdnjs.cloudflare.com/ajax/libs/underscore.string/1.1.4/underscore.string.min.js",
+
+  // google maps
+  "http://maps.google.com/maps/api/js?sensor=false",
 
   // google visualisation
   "http://www.google.com/jsapi",
   //"http://dygraphs.com/dygraph-combined.js", //http://dygraphs.com/
-  "http://dygraphs.com/dygraph-dev.js",
+  //"http://dygraphs.com/dygraph-dev.js",
 
   "/js/data.js"
   ]);

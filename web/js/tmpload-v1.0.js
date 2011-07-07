@@ -5,7 +5,7 @@ Copyright 2011, Mark Dalgleish
 This content is released under the MIT License
 github.com/markdalgleish/tmpload/blob/master/MIT-LICENSE.txt
 
-Modified to use named templates
+DL:Modified to use named templates
 */
 (function($, undefined) {
     //Template cache
@@ -31,7 +31,7 @@ Modified to use named templates
                     //The template hasn't been loaded yet
                     return $.Deferred(function(dfd) {
                         $.get(templates[obj]).success(function(d) {
-                            // this is my mod:
+                            // DL:this is my mod:
                             templates[obj] = $.template(obj,d);
                             dfd.resolve(templates[obj]);
                         }).error(function(d) {

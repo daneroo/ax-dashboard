@@ -1,8 +1,3 @@
 <div data-role="page" id="${id}"  data-url="${id}">
-    {{tmpl({header:name}) "header"}}
-    <div data-role="content">
-        ${id}:${name}
-        {{tmpl(widgets) "widget"}}        
-    </div>
-    {{tmpl "footer"}}
+    {{tmpl(this.data,{site:this.site}) "page-inner"}}
 </div>
