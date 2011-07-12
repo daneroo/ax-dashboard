@@ -38,6 +38,7 @@ $(document).ready(function() {
           }
         });
         $('#editor').accordion("activate",false);
+        
         $('.widget h3').live('click',function(){
           var item = $(this).tmplItem();
           console.log('clicked: ',item);
@@ -46,10 +47,12 @@ $(document).ready(function() {
         })
         $('.widget .widget-edit-header').live('change',function(){
           var value = $(this).attr('value');
+          
           var item = $(this).tmplItem();
           var wtype = item.data.type;
           var tpl = templateForWidgetType(wtype);
           console.log('changed from: ',item.data.label);
+          
           globalSite.site.pages[0].widgets[0].label=value;
           item.data.label = value;
           //$(this).parent().html($.tmpl('widget-header',item.data));
