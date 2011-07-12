@@ -22,6 +22,7 @@ dashboard_load([
   //"/js/tmpload-v1.0.min.js",
   "/js/tmpload-v1.0.js",
 
+  "/js/common.js", // before mobile, for mobileinit
   "/js/mobile.js", // before mobile, for mobileinit
   "http://code.jquery.com/mobile/1.0b1/jquery.mobile-1.0b1.min.js",
 
